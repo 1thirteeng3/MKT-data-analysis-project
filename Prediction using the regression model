@@ -1,0 +1,27 @@
+# Importing necessary librarys 
+import pandas as pd
+import numpy as np
+
+# Ensure the model has been trained and is available
+if 'model' in globals() and hasattr(model, 'predict'):
+    # Define some example advertising investments for YouTube, Facebook, and Newspaper
+    example_investments = [[200, 30, 20], [150, 25, 15], [300, 40, 10]]  # Example investments
+
+    # Convert to a NumPy array to ensure proper input format
+    example_investments = np.array(example_investments)
+
+    # Check if the input shape matches the model's expected input shape
+    if example_investments.shape[1] == 3:  # Ensure 3 columns (YouTube, Facebook, Newspaper)
+        # Predict sales based on the example investments
+        predicted_sales = model.predict(example_investments)
+
+        # Creating a DataFrame to display the results
+        predictions_df = pd.DataFrame(example_investments, columns=['YouTube', 'Facebook', 'Newspaper'])
+        predictions_df['Predicted Sales'] = predicted_sales
+
+        # Displaying the predictions DataFrame
+        print(predictions_df)
+    else:
+        print("Error: The input data must have 3 features (YouTube, Facebook, Newspaper).")
+else:
+    print("Error: The model is not trained or defined.")
