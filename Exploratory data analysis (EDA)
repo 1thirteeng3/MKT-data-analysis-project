@@ -1,0 +1,34 @@
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Ensure the dataset 'df' is defined
+if 'df' in globals():
+    # Checking for correlations between the variables
+    correlation_matrix = df.corr()
+
+    # Plotting the correlation heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+    plt.title('Correlation Heatmap')
+    plt.show()
+
+    # Visualizing the distribution of sales
+    if 'sales' in df.columns:
+        plt.figure(figsize=(8, 6))
+        sns.histplot(df['sales'], bins=10, kde=True)
+        plt.title('Sales Distribution')
+        plt.xlabel('Sales')
+        plt.ylabel('Frequency')
+        plt.show()
+    else:
+        print("Error: 'sales' column not found in the dataset.")
+
+    # Pairplot to visualize relationships between variables
+    sns.pairplot(df)
+    plt.suptitle('Pairplot of Variables', y=1.02)  # Adjust y for better spacing
+    plt.show()
+
+    print('Exploratory analysis completed.')
+else:
+    print("Error: Dataset 'df' is not defined.")
